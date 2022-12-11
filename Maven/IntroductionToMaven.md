@@ -121,7 +121,8 @@ Ví dụ một file pom.xml:
 </project>
 ```
 # 4. Build lifecycle
-Build lifecycle là những định nghĩa về tiến trình build và distribute của một dự án
+Build lifecycle là những định nghĩa về tiến trình build và distribute của một dự án.
+
 Có 3 loại built-in lifecycle gồm:
 -	`default`: handles your project deployment
 -	`clean`: handles project cleaning
@@ -138,5 +139,7 @@ Một build lifecycle bao gồm nhiều giai đoạn, ví dụ đối với `def
 
 # 5. Dependency Management
 Quản lý các dependency là một trong những tính năng cốt lõi của Maven. Việc quản lý các dependency trong những dự án nhiều module với hàng trăm module khác nhau trở nên khả thi.
+
 https://maven.apache.org/guides/introduction/introduction-to-dependency-mechanism.html
+
 To be continue ...
