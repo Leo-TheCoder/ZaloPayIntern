@@ -9,7 +9,6 @@
 
 [4. Build Lifecycle](#4-build-lifecycle)
 
-[5. Dependency Management](#5-dependency-management)
 
 # 1. Giới thiệu về Maven
 ![](https://cloudviet.com.vn/wp-content/uploads/2021/10/Apache-maven.jpg)
@@ -137,9 +136,4 @@ Một build lifecycle bao gồm nhiều giai đoạn, ví dụ đối với `def
 - `install` - install the package into the local repository, for use as a dependency in other projects locally
 - `deploy` - done in the build environment, copies the final package to the remote repository for sharing with other developers and projects.
 
-# 5. Dependency Management
-Quản lý các dependency là một trong những tính năng cốt lõi của Maven. Việc quản lý các dependency trong những dự án nhiều module với hàng trăm module khác nhau trở nên khả thi.
-
-https://maven.apache.org/guides/introduction/introduction-to-dependency-mechanism.html
-
-To be continue ...
+Nguồn tham khảo: https://maven.apache.org/
