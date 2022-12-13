@@ -16,7 +16,7 @@ Apache Maven là một công cụ quản lý dự án phần mềm. Dựa trên 
 Mục tiêu chính của Maven là cho phép các developer nắm được các trạng thái trong suốt quá trình phát triển của một dự án phần mềm một cách dễ dàng và nhanh chóng. Để đạt được điều này, Maven cần đạt được những mục tiêu nhỏ sau:
 -	Làm cho quá trình build trở nên dễ dàng: Maven hỗ trợ những chi tiết cầu kì trong lúc build, khiến việc build dễ dàng hơn
 -	Cung cấp hệ thống build đồng nhất: Maven build một dự án với việc sử dụng POM và nhiều plugins. Một khi đã quen với một dự án Maven, bạn sẽ hiểu được những dự án Maven khác 
--	Cung cấp những thông tin quan trọng của project:  change log from source control, cross referenced sources, các dependencies của project, …
+-	Cung cấp và quản lý những thông tin quan trọng của project:  cross referenced sources, các dependencies của project, …
 
 # 2. Tạo một dự án Maven
 Các bước cài đặt một project sử dụng Maven:
@@ -53,7 +53,7 @@ Tệp pom.xml là cấu hình cốt lõi của một dự án Maven. Đây là t
 - **project:** Là thẻ top-level trong một file pom.xml.
 - **modelVersion:** Thẻ này cho biết phiên bản của object model mà POM này đang sử dụng. Bản thân phiên bản của object model rất hiếm khi thay đổi nhưng thẻ này là bắt buộc để đảm bảo tính ổn định của việc sử dụng và khi phải thay đổi mô hình.
 - **groupId:** Thẻ này cho biết mã định danh duy nhất của tổ chức hoặc nhóm đã tạo dự án. groupId là một trong những mã định danh chính của dự án và thường dựa trên tên miền đầy đủ của tổ chức. Ví dụ: org.apache.maven.plugins là groupId được chỉ định cho tất cả các plugin Maven.
-- **artifactId:** Thẻ này cho biết tên của thành phẩm chính được tạo bởi dự án này. Thành phẩm chính của dự án thường là file JAR. Các thành phẩm phụ như source bundles cũng sử dụng artifactId như một phần trong tên cuối cùng của chúng. Một thành phẩm điển hình do Maven tạo ra sẽ có dạng <artifactId>-<version>.<extension> (ví dụ: myapp-1.0.jar).
+- **artifactId:** Thẻ này cho biết tên của thành phẩm chính được tạo bởi dự án này. Thành phẩm chính của dự án thường là file JAR. Các thành phẩm phụ như source bundles cũng sử dụng artifactId như một phần trong tên cuối cùng của chúng. Một thành phẩm điển hình do Maven tạo ra sẽ có dạng ``<artifactId>-<version>.<extension>`` (ví dụ: myapp-1.0.jar).
 - **version:** Thẻ này cho biết phiên bản của thành phẩm do dự án tạo ra. Giúp ta quản lý phiên bản và ta sẽ thường thấy SNAPSHOT trong một phiên bản, biểu thị rằng một dự án đang ở trạng thái phát triển
 - **name:** Thẻ này cho biết tên hiển thị sử dụng cho dự án. Tên này thường được sử dụng trong các tài liệu do ;Maven tạo ra.
 - **url:** Thẻ này biểu thị đường dẫn đến dự án. Đường dẫn này thường được sử dụng trong các tài liệu do Maven tạo ra
