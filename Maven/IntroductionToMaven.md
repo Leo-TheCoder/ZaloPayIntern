@@ -9,6 +9,9 @@
 
 [4. Build Lifecycle](#4-build-lifecycle)
 
+[5. Dependency Management](#5-dependency-management)
+
+[6. Khởi chạy application từ Maven](#6-khởi-chạy-application-từ-maven)
 
 # 1. Giới thiệu về Maven
 ![](https://cloudviet.com.vn/wp-content/uploads/2021/10/Apache-maven.jpg)
@@ -135,5 +138,84 @@ Một build lifecycle bao gồm nhiều giai đoạn, ví dụ đối với `def
 - `verify` - run any checks on results of integration tests to ensure quality criteria are met
 - `install` - install the package into the local repository, for use as a dependency in other projects locally
 - `deploy` - done in the build environment, copies the final package to the remote repository for sharing with other developers and projects.
+
+# 5. Dependency Management
+
+Maven cung cấp một cơ chế để dễ dàng điều phối các dependency từ nhiều nơi khác nhau. Cụ thể hơn với những dependency mà dự án của ta sử dụng, Maven sẽ kiểm tra các dependency mà những dependency này phụ thuộc ở remote repository. Cứ đệ quy như vậy đến những project và dependency khác, tạo thành một cây dependency trong dự án của ta. Đây được gọi là Transitive Dependencies.
+
+Do có tính chất đệ quy mà cây dependency này sẽ mau chóng phát triển ra, dễ dẫn đến những tình huồng phụ thuộc chồng chéo giữa các dependency. Vì thế Maven có những tính năng nhằm giảm thiểu điều này:
+
+- Dependency Mediation: đây là cơ chế giúp xác định version của một artifact khi nhiều version khác nhau của artifact đó được xác định trong cây dependency. Maven sẽ lựa chọn sử dụng version của dependency "gần nhất" trong cây.
+Ví dụ:
+```
+  A
+  ├── B
+  │   └── C
+  │       └── D 2.0
+  └── E
+      └── D 1.0
+```
+Ở đây có 2 dependency D được xác định => Maven sẽ chọn D 1.0 do đường đi A->B->C->D xa hơn A->E->D.
+Trong trường hợp cả 2 đều có cùng level (độ dài đường đi là như nhau) thì Maven sẽ tự động chọn dependency đầu tiên load được.
+
+- Dependency Management: Maven có thể cho ta tự chọn version của một dependency dù project không trực tiếp sử dụng dependency đó, thông qua việc khai báo thẳng version của artifact vào danh sách các dependency trực tiếp. 
+Trong ví dụ trên, ta cũng có thể ép Maven sử dụng D 2.0 bằng cách tự khai báo dependency đó trong dự án:
+```
+  A
+  ├── B
+  │   └── C
+  │       └── D 2.0
+  ├── E
+  │   └── D 1.0
+  │
+  └── D 2.0      
+```
+
+- Dependency Scope: Với chức năng này, ta có thể xác định được dependency sẽ được sử dụng trong từng giai đoạn build
+
+- Excluded Dependencies: Nếu project X phụ thuộc vào Y, Y phụ thuộc vào Z thì X có thể hoàn toàn loại Z ra, sử dụng thẻ ``<exclusion>``
+
+- Optional Dependencies: Nếu Y phụ thuộc vào Z thì Y có thể xem Z là optional dependency, Khi X phụ thuộc Y thì chỉ phụ thuộc mỗi Y mà không phụ thuộc Z. X có thể trực tiếp thêm dependency Z vào nếu có nhu cầu.
+
+# 6. Khởi chạy application từ Maven
+
+1. Config JVM:
+  - Thêm vào enviroment variable ``MAVEN_OPTS`` với giá trị ``-Xms256m -Xmx512m``
+Config này giúp hiệu chỉnh heapstack khởi tạo JVM cho dự án này (cụ thể như trên sẽ là tối thiểu 256MB đến 512MB)
+
+2. Edit POM.xml
+  ```xml
+  <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>2.4</version>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <mainClass>com.mycompany.app.App</mainClass>
+                        </manifest>
+                    </archive>
+                </configuration>
+            </plugin>
+            <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>exec-maven-plugin</artifactId>
+        <version>3.1.0</version>
+      </plugin>
+        </plugins>
+    </build>     
+  ``` 
+
+3. Build
+Chạy lệnh ``mvn clean package`` để build dự án thành file JAR, WAR, ...
+
+4. Run
+Dùng lệnh `mvn exec:java -Dexec.mainClass="com.mycompany.app.App"` để tiến hành chạy project
+Tham số ``exec.mainClass`` dùng để Maven xác định main class của dự án.
+
+5. Kết quả
+![](https://scontent.fsgn12-1.fna.fbcdn.net/v/t1.15752-9/318578251_734167348310932_972204297386700114_n.png?_nc_cat=110&ccb=1-7&_nc_sid=ae9488&_nc_ohc=jL-CcI-vb-MAX-uAVCa&_nc_ht=scontent.fsgn12-1.fna&oh=03_AdRJK4CIT6vfZ7h9jq4YDIguXZDDmDRFktf0B37tpZVcew&oe=63C018AC)
 
 Nguồn tham khảo: https://maven.apache.org/
