@@ -218,4 +218,7 @@ Tham số ``exec.mainClass`` dùng để Maven xác định main class của d�
 5. Kết quả
 ![](https://scontent.fsgn12-1.fna.fbcdn.net/v/t1.15752-9/318578251_734167348310932_972204297386700114_n.png?_nc_cat=110&ccb=1-7&_nc_sid=ae9488&_nc_ohc=jL-CcI-vb-MAX-uAVCa&_nc_ht=scontent.fsgn12-1.fna&oh=03_AdRJK4CIT6vfZ7h9jq4YDIguXZDDmDRFktf0B37tpZVcew&oe=63C018AC)
 
-Nguồn tham khảo: https://maven.apache.org/
+
+Nguồn tham khảo: 
+- https://maven.apache.org/
+- https://www.oracle.com/webfolder/technetwork/tutorials/obe/java/Maven_SE/Maven.html#section5s2
