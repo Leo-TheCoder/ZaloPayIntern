@@ -252,7 +252,7 @@ Tham số ``exec.mainClass`` dùng để Maven xác định main class của d�
 Chạy lệnh ``mvn clean package`` để build dự án thành file JAR, WAR, ...
 2. Sử dụng lệnh ``java -jar -Xms256m -Xmx512m target/my-app-1.0-SNAPSHOT.jar``
 3. Kết quả:
-![](https://scontent.fsgn6-1.fna.fbcdn.net/v/t1.15752-9/317391156_833134991117139_519410390894967212_n.png?_nc_cat=106&ccb=1-7&_nc_sid=ae9488&_nc_ohc=7IbAYkL7qOgAX_s-E3x&_nc_ht=scontent.fsgn6-1.fna&oh=03_AdR5xwmfpdvzGFpRpAuE_ovq3OCYHXW_Kr4F_AtBjiMcRw&oe=63C6836A)
+![](https://scontent.fsgn6-2.fna.fbcdn.net/v/t1.15752-9/315521025_454806316802016_3480769265275235368_n.png?_nc_cat=105&ccb=1-7&_nc_sid=ae9488&_nc_ohc=aXX3fAmvau0AX91C5Wc&_nc_ht=scontent.fsgn6-2.fna&oh=03_AdTgRdmXARxcUbSP79BsfQYZiT1Ywj-uGpA9YpeWaabzgA&oe=63C6963D)
 # 7. Tích hợp Sonarqube
 
 1. Sonarqube là gì?
