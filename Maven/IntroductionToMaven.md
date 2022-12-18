@@ -275,3 +275,4 @@ Và SonarQube giải thích lý do và đưa ra giải pháp cho từng trườn
 Nguồn tham khảo: 
 - https://maven.apache.org/
 - https://www.oracle.com/webfolder/technetwork/tutorials/obe/java/Maven_SE/Maven.html#section5s2
+- https://docs.sonarqube.org/latest/analyzing-source-code/scanners/sonarscanner-for-maven/
