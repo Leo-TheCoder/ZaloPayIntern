@@ -173,16 +173,43 @@ Trong ví dụ trên, ta cũng có thể ép Maven sử dụng D 2.0 bằng các
 
 - Dependency Scope: Với chức năng này, ta có thể xác định được dependency sẽ được sử dụng trong từng giai đoạn build
 
-- Excluded Dependencies: Nếu project X phụ thuộc vào Y, Y phụ thuộc vào Z thì X có thể hoàn toàn loại Z ra, sử dụng thẻ ``<exclusion>``
+- Excluded Dependencies: Nếu project X phụ thuộc vào Y, Y phụ thuộc vào Z thì X có thể hoàn toàn loại Z ra , ta có sử dụng thẻ ``<exclusion>``
+```
+ X
+ ├── Y
+ │   └── Z    <!-- Can be excluded -->
+ │       └── F
+ ├── C
+ │   └── D
+```
 
-- Optional Dependencies: Nếu Y phụ thuộc vào Z thì Y có thể xem Z là optional dependency, Khi X phụ thuộc Y thì chỉ phụ thuộc mỗi Y mà không phụ thuộc Z. X có thể trực tiếp thêm dependency Z vào nếu có nhu cầu.
+- Optional Dependencies: Nếu Y phụ thuộc vào Z thì Y có thể xem Z là optional dependency, Khi X phụ thuộc Y thì chỉ phụ thuộc mỗi Y mà không phụ thuộc Z. X có thể trực tiếp thêm dependency Z vào nếu có nhu cầu. **Có thểm xem như đây là excluded by default**
 
 # 6. Khởi chạy application từ Maven
 
-1. Config JVM:
-  - Thêm vào enviroment variable ``MAVEN_OPTS`` với giá trị ``-Xms256m -Xmx512m``
+## Cách 1:
+1. Config JVM: Thêm vào enviroment variable ``MAVEN_OPTS`` với giá trị 
+- ``-Xms256m -Xmx512m``
 Config này giúp hiệu chỉnh heapstack khởi tạo JVM cho dự án này (cụ thể như trên sẽ là tối thiểu 256MB đến 512MB)
-
+- Chọn thuật toán cho Garbage Collection
+```bash
+-XX:+UseSerialGC => sử dụng Serial GC
+-XX:+UseParallelGC => sử dụng Parallel GC
+-XX:+USeParNewGC => sử dụng CMS GC
+-XX:+UseG1GC => sử dụng G1 GC
+```
+- Ngoài ra có thể lưu lại hoạt động GC, để chúng ta có thể kiểm tra khi có lỗi liên quan đến bộ nhớ xảy ra, ví dụ như:
+```bash
+-XX:+UseGCLogFileRotation
+-XX:NumberOfGCLogFiles=10
+-XX:GCLogFileSize=50M
+-Xloggc:/home/user/log/gc.log
+```
+Trong đó:
+  - ``-XX:+UseGCLogFileRotation``: việc ghi log sẽ xoay vòng qua từng file khi nó đạt đến giới hạn kích thước và số lượng file
+  - ``-XX:NumberOfGCLogFiles``: Số lượng file log tối đa của một ứng dụng, những file cũ sẽ bị xóa nhường chỗ cho file mới
+  - ``-XX:GCLogFileSize``: kích thước tối đa của 1 file
+  - ``-Xloggc``: vị trí đặt file log
 2. Edit POM.xml
   ```xml
   <build>
@@ -209,16 +236,42 @@ Config này giúp hiệu chỉnh heapstack khởi tạo JVM cho dự án này (c
   ``` 
 
 3. Build
+
 Chạy lệnh ``mvn clean package`` để build dự án thành file JAR, WAR, ...
 
 4. Run
+
 Dùng lệnh `mvn exec:java -Dexec.mainClass="com.mycompany.app.App"` để tiến hành chạy project
 Tham số ``exec.mainClass`` dùng để Maven xác định main class của dự án.
 
 5. Kết quả
 ![](https://scontent.fsgn12-1.fna.fbcdn.net/v/t1.15752-9/318578251_734167348310932_972204297386700114_n.png?_nc_cat=110&ccb=1-7&_nc_sid=ae9488&_nc_ohc=jL-CcI-vb-MAX-uAVCa&_nc_ht=scontent.fsgn12-1.fna&oh=03_AdRJK4CIT6vfZ7h9jq4YDIguXZDDmDRFktf0B37tpZVcew&oe=63C018AC)
 
+## Cách 2:
+1. Build:
+Chạy lệnh ``mvn clean package`` để build dự án thành file JAR, WAR, ...
+2. Sử dụng lệnh ``java -jar -Xms256m -Xmx512m target/my-app-1.0-SNAPSHOT.jar``
+3. Kết quả:
+![](https://scontent.fsgn6-1.fna.fbcdn.net/v/t1.15752-9/317391156_833134991117139_519410390894967212_n.png?_nc_cat=106&ccb=1-7&_nc_sid=ae9488&_nc_ohc=7IbAYkL7qOgAX_s-E3x&_nc_ht=scontent.fsgn6-1.fna&oh=03_AdR5xwmfpdvzGFpRpAuE_ovq3OCYHXW_Kr4F_AtBjiMcRw&oe=63C6836A)
+# 7. Tích hợp Sonarqube
 
+1. Sonarqube là gì?
+Sonarqube là một nền tảng mã nguồn mở được phát triển từ mười năm trước bởi SonarSource với mục đích kiểm tra liên tục chất lượng code, review của dự án bằng cách phân tích code để phát hiện các đoạn code không tốt, code lỗi hay những lỗ hổng bảo mật.
+Các chức năng khác của Sonarqube có thể kể đến là:
+- Phát hiện bug
+- Phát hiện code smell, duplicate
+- Tính toán độ phủ của unit test (Unit-test converage)
+- Tính toán technical debt
+- So sánh chất lượng code với các lần kiểm tra trước
+2. Cài đặt và sử dụng Sonarqube
+- Cài đặt server Sonarqube chạy local: https://docs.sonarqube.org/latest/setup-and-upgrade/install-the-server/
+![](https://scontent.fsgn12-1.fna.fbcdn.net/v/t1.15752-9/318444883_1538801843302204_1513320237755330929_n.png?_nc_cat=104&ccb=1-7&_nc_sid=ae9488&_nc_ohc=FycA8aZmoEAAX9i8Sqp&_nc_ht=scontent.fsgn12-1.fna&oh=03_AdRP3pZyZHkft95ldDNXXVopvbbMqmE-DHN_dw0tIggmxg&oe=63C644EE)
+- Analyze project maven với câu lệnh ``mvn clean verify sonar:sonar -Dsonar.login=myAuthenticationToken`` với ``myAuthenticationToken`` lấy từ setting Sonarqube
+![](https://scontent.fsgn6-1.fna.fbcdn.net/v/t1.15752-9/317493744_493455752887012_3507777952413794895_n.png?_nc_cat=106&ccb=1-7&_nc_sid=ae9488&_nc_ohc=HbduRP7u4VkAX_bp-iv&_nc_ht=scontent.fsgn6-1.fna&oh=03_AdSFO_DvOx1fDGtIZntVRK8k9fciY57P6c7JgVI_sHU6FQ&oe=63C65E98)
+- Có thể thấy được SonarQube phân tích cho ta thấy những điểm sai sót, chưa tối ưu trong code, ví dụ như: 
+![](https://scontent.fsgn12-1.fna.fbcdn.net/v/t1.15752-9/320182952_956742499064623_2011948380284941668_n.png?_nc_cat=102&ccb=1-7&_nc_sid=ae9488&_nc_ohc=xUFGDR2G1BsAX-iEAeB&_nc_ht=scontent.fsgn12-1.fna&oh=03_AdQFDltW28Ar0IMUozyQ793SOEIDOCfhFOVTgSkyypr1og&oe=63C67547)
+Và SonarQube giải thích lý do và đưa ra giải pháp cho từng trường hợp, ví dụ:
+![](https://scontent.fsgn6-2.fna.fbcdn.net/v/t1.15752-9/318335152_520736070010098_8264256139249853149_n.png?_nc_cat=105&ccb=1-7&_nc_sid=ae9488&_nc_ohc=szWBOZN41dEAX8ZxqG5&_nc_ht=scontent.fsgn6-2.fna&oh=03_AdTdB6C7HXINgtJzG6FjkNGDv5hWjnyyB0yoF_MuLJuQgQ&oe=63C65988)
 Nguồn tham khảo: 
 - https://maven.apache.org/
 - https://www.oracle.com/webfolder/technetwork/tutorials/obe/java/Maven_SE/Maven.html#section5s2
