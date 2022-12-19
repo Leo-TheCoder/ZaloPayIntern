@@ -271,7 +271,7 @@ Chạy lệnh ``mvn clean package`` để build dự án thành file JAR, WAR, .
 1. Sonarqube là gì?
 
 Sonarqube là một nền tảng mã nguồn mở được phát triển từ mười năm trước bởi SonarSource với mục đích kiểm tra liên tục chất lượng code, review của dự án bằng cách phân tích code để phát hiện các đoạn code không tốt, code lỗi hay những lỗ hổng bảo mật.
-Các chức năng khác của Sonarqube có thể kể đến là:
+Các chức năng chính của Sonarqube có thể kể đến là:
 - Phát hiện bug
 - Phát hiện code smell, duplicate
 - Tính toán độ phủ của unit test (Unit-test converage)
