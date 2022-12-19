@@ -13,6 +13,8 @@
 
 [6. Khởi chạy application từ Maven](#6-khởi-chạy-application-từ-maven)
 
+[7. Tích hợp Sonarqube](#7-tích-hợp-sonarqube)
+
 # 1. Giới thiệu về Maven
 ![](https://cloudviet.com.vn/wp-content/uploads/2021/10/Apache-maven.jpg)
 Apache Maven là một công cụ quản lý dự án phần mềm. Dựa trên khái niệm về mô hình đối tượng dự án (Project Object Model - POM), Maven có thể quản lý quá trình xây dựng, báo cáo và tài liệu của dự án từ một phần thông tin trung tâm.
