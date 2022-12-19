@@ -20,9 +20,9 @@
 Apache Maven là một công cụ quản lý dự án phần mềm. Dựa trên khái niệm về mô hình đối tượng dự án (Project Object Model - POM), Maven có thể quản lý quá trình xây dựng, báo cáo và tài liệu của dự án từ một phần thông tin trung tâm.
 
 Mục tiêu chính của Maven là cho phép các developer nắm được các trạng thái trong suốt quá trình phát triển của một dự án phần mềm một cách dễ dàng và nhanh chóng. Để đạt được điều này, Maven cần đạt được những mục tiêu nhỏ sau:
--	Làm cho quá trình build trở nên dễ dàng: Maven hỗ trợ những chi tiết cầu kì trong lúc build, khiến việc build dễ dàng hơn
--	Cung cấp hệ thống build đồng nhất: Maven build một dự án với việc sử dụng POM và nhiều plugins. Một khi đã quen với một dự án Maven, bạn sẽ hiểu được những dự án Maven khác 
--	Là một nơi quản lý và lưu trữ các thư viện, các dependency, ... thông qua Maven Repository.
+-	Làm cho quá trình build trở nên dễ dàng: Maven hỗ trợ những chi tiết cầu kì trong lúc build, khiến việc build dễ dàng hơn, tăng hiệu suất tối ưu nhất cho dự án.
+-	Cung cấp hệ thống build đồng nhất: Maven build một dự án với việc sử dụng POM và nhiều plugins. Một khi đã quen với một dự án Maven, bạn sẽ hiểu được những dự án Maven khác. Thiết lập tính nhất quán được đảm bảo trên tất cả các dự án.
+-	Là một nơi quản lý và lưu trữ các thư viện, các dependency, ... thông qua Maven Repository và liên tục được cập nhật.
 
 # 2. Tạo một dự án Maven
 Các bước cài đặt một project sử dụng Maven:
