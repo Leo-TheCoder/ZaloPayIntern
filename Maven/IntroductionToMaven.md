@@ -145,6 +145,15 @@ Một build lifecycle bao gồm nhiều giai đoạn, ví dụ đối với `def
 # 5. Dependency Management
 
 Maven cung cấp một cơ chế để dễ dàng điều phối các dependency từ nhiều nơi khác nhau. Cụ thể hơn với những dependency mà dự án của ta sử dụng, Maven sẽ kiểm tra các dependency mà những dependency này phụ thuộc ở remote repository. Cứ đệ quy như vậy đến những project và dependency khác, tạo thành một cây dependency trong dự án của ta. Đây được gọi là Transitive Dependencies.
+```
+  A
+  ├── B
+  │   └── C
+  │       └── D
+  ├── E
+  │   └── F
+  ...
+```
 
 Do có tính chất đệ quy mà cây dependency này sẽ mau chóng phát triển ra, dễ dẫn đến những tình huồng phụ thuộc chồng chéo giữa các dependency. Vì thế Maven có những tính năng nhằm giảm thiểu điều này:
 
