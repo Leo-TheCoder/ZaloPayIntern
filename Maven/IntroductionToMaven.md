@@ -65,7 +65,7 @@ Tệp pom.xml là cấu hình cốt lõi của một dự án Maven. Đây là t
 - **url:** Thẻ này biểu thị đường dẫn đến dự án. Đường dẫn này thường được sử dụng trong các tài liệu do Maven tạo ra
 - **properties:** Thẻ chứa những thông tin thuộc tính được sử dụng trong file POM.
 - **dependencies:** Thẻ chứa danh sách những dependencies của dự án, là một thẻ cốt lõi của POM.
-- **build:** Thẻ này xử lý những thứ như khai báo cấu trúc thư mục dự án và quản lý các plugin.
+- **build:** Thẻ này có công dụng khai báo và quản lý các plugin được sử dụng trong quá trình build.
 
 Ví dụ một file pom.xml:
 ```xml
