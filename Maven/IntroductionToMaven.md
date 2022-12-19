@@ -151,7 +151,8 @@ Maven cung cấp một cơ chế để dễ dàng điều phối các dependency
   │   └── C
   │       └── D
   ├── E
-  │   └── F
+  │   ├── F
+  │   └── G
   ...
 ```
 
