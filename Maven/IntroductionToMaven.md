@@ -17,7 +17,7 @@
 
 # 1. Giới thiệu về Maven
 ![](https://cloudviet.com.vn/wp-content/uploads/2021/10/Apache-maven.jpg)
-Apache Maven là một công cụ quản lý dự án phần mềm. Dựa trên khái niệm về mô hình đối tượng dự án (Project Object Model - POM), Maven có thể quản lý quá trình xây dựng, báo cáo và tài liệu của dự án từ một phần thông tin trung tâm.
+Apache Maven là một công cụ quản lý dự án phần mềm. Dựa trên khái niệm về mô hình đối tượng dự án (Project Object Model - POM), Maven có thể quản lý quá trình xây dựng, báo cáo và tài liệu của dự án từ một phần thông tin cốt lõi.
 
 Mục tiêu chính của Maven là cho phép các developer nắm được các trạng thái trong suốt quá trình phát triển của một dự án phần mềm một cách dễ dàng và nhanh chóng. Để đạt được điều này, Maven cần đạt được những mục tiêu nhỏ sau:
 -	Làm cho quá trình build trở nên dễ dàng: Maven hỗ trợ những chi tiết cầu kì trong lúc build, khiến việc build dễ dàng hơn, tăng hiệu suất tối ưu nhất cho dự án.
